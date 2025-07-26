@@ -8,8 +8,15 @@ import {
 } from "@/lib/types";
 
 export const productService = {
-  // Récupérer tous les produits
-  getProducts: async (params?: { search?: string; page?: number }): Promise<PaginatedResponse<Product>> => {
+  // Récupérer tous les produits avec pagination et recherche
+  getProducts: async (params?: { 
+    search?: string; 
+    page?: number; 
+    page_size?: number;
+    ordering?: string;
+    category?: string;
+    supplier?: number;
+  }): Promise<PaginatedResponse<Product>> => {
     const { data } = await api.get("products/", { params });
     return data;
   },

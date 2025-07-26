@@ -1,15 +1,12 @@
 'use client';
 
-import AuthGuard from '@/components/AuthGuard';
 import MainLayout from '@/components/MainLayout';
-import ProductList from '@/components/products/ProductList';
+import ProductTable from '@/components/products/ProductTable';
 
 export default function ProductsPage() {
   return (
-    <AuthGuard>
-      <MainLayout>
-        <ProductList />
-      </MainLayout>
-    </AuthGuard>
+    <MainLayout>
+      <ProductTable />
+    </MainLayout>
   );
 }

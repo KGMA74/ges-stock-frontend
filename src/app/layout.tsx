@@ -25,10 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakarta.variable}`}>
       <body
-        className={`${plusJakarta.variable} h-screen w-screen flex font-sans overflow-hidden relative`}
+        className={`${plusJakarta.variable} h-screen w-screen font-sans relative`}
       >
         <ReactQueryProvider>
-          {" "}
           <Toaster position="top-right" richColors theme="dark" />
           <ScreenIndicator />
           <AuthGuard>{children}</AuthGuard>

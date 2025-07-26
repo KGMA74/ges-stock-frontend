@@ -17,11 +17,20 @@ export const productKeys = {
 };
 
 // Hook pour récupérer les produits
-export const useProducts = (params?: { search?: string; page?: number }) => {
+export const useProducts = (params?: { 
+  search?: string; 
+  page?: number; 
+  page_size?: number;
+  ordering?: string;
+  category?: string;
+  supplier?: number;
+}) => {
   return useQuery({
     queryKey: productKeys.list(params),
     queryFn: () => productService.getProducts(params),
     staleTime: 5 * 60 * 1000, // 5 minutes
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
 };
 

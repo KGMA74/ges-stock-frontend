@@ -6,10 +6,8 @@ import StockEntryList from '@/components/StockEntryList';
 
 export default function StockEntriesPage() {
   return (
-    <AuthGuard>
       <MainLayout>
         <StockEntryList />
       </MainLayout>
-    </AuthGuard>
   );
 }
