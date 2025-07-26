@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
+import ReactQueryProvider from "@/components/provider";
+import ScreenIndicator from "@/components/utils/ScreenIndicator";
+import AuthGuard from "@/components/AuthGuard";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-plus-jakarta",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -23,11 +23,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${plusJakarta.variable}`}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${plusJakarta.variable} h-screen w-screen flex font-sans overflow-hidden relative`}
       >
-        {children}
+        <ReactQueryProvider>
+          {" "}
+          <Toaster position="top-right" richColors theme="dark" />
+          <ScreenIndicator />
+          <AuthGuard>{children}</AuthGuard>
+        </ReactQueryProvider>
       </body>
     </html>
   );
