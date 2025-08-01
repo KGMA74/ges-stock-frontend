@@ -127,7 +127,7 @@ const Dashboard: React.FC = () => {
             <div>
               <p className="text-sm text-gray-600">Valeur Stock</p>
               <p className="text-2xl font-bold text-gray-900">
-                {statsLoading ? '...' : `${mockStats.totalValue.toLocaleString()} €`}
+                {statsLoading ? '...' : `${mockStats.totalValue.toLocaleString()} F`}
               </p>
             </div>
             <div className="bg-yellow-100 p-3 rounded-full">

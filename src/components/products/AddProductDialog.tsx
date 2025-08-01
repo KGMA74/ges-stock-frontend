@@ -65,9 +65,14 @@ const AddProductDialog: React.FC<AddProductDialogProps> = ({ onSuccess }) => {
     try {
       await createProductMutation.mutateAsync(data);
       toast.success('Produit créé avec succès !');
-      reset();
-      setOpen(false);
-      onSuccess?.();
+      
+      // Petit délai pour permettre à l'animation de se terminer proprement
+      setTimeout(() => {
+        reset();
+        setOpen(false);
+      }, 100);
+      
+      // onSuccess?.(); // Supprimé car la mise à jour se fait automatiquement via le cache
     } catch (error) {
       console.error('Erreur lors de la création du produit:', error);
       toast.error('Erreur lors de la création du produit');

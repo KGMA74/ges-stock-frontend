@@ -158,7 +158,7 @@ const StockEntryList: React.FC = () => {
                         {entry.items?.length || 0} article(s)
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {entry.total_amount ? `${parseFloat(entry.total_amount).toFixed(2)} €` : 'N/A'}
+                        {entry.total_amount ? `${parseFloat(entry.total_amount).toFixed(2)} F` : 'N/A'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {getStatusBadge('confirmed')}

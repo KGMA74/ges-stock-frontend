@@ -146,7 +146,7 @@ const StockExitList: React.FC = () => {
                         {exit.items?.length || 0} article(s)
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {parseFloat(exit.total_amount).toFixed(2)} €
+                        {parseFloat(exit.total_amount).toFixed(2)} F
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <div className="flex items-center gap-2">

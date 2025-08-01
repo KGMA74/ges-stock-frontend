@@ -28,7 +28,9 @@ export const useProducts = (params?: {
   return useQuery({
     queryKey: productKeys.list(params),
     queryFn: () => productService.getProducts(params),
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    placeholderData: (previousData) => previousData, // Garde les données précédentes pendant le chargement
+    staleTime: 5 * 60 * 1000, // 5 minutes - considère les données comme fraîches
+    gcTime: 10 * 60 * 1000, // 10 minutes - garde en cache
     retry: 3,
     retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
@@ -50,20 +52,33 @@ export const useCreateProduct = () => {
   return useMutation({
     mutationFn: productService.createProduct,
     onSuccess: (newProduct) => {
-      // Invalider la liste des produits
-      queryClient.invalidateQueries({ queryKey: productKeys.lists() });
-      
-      // Ajouter le nouveau produit au cache
+      // Mise à jour optimiste du cache au lieu d'invalidation complète
       queryClient.setQueryData(
         productKeys.detail(newProduct.id),
         newProduct
       );
       
-      toast.success("Produit créé avec succès");
+      // Mise à jour optimiste de la liste des produits
+      const queryKeys = queryClient.getQueryCache().findAll({
+        queryKey: productKeys.lists(),
+      });
+      
+      queryKeys.forEach((query) => {
+        const oldData = query.state.data as any;
+        if (oldData?.results) {
+          queryClient.setQueryData(query.queryKey, {
+            ...oldData,
+            results: [newProduct, ...oldData.results],
+            count: (oldData.count || 0) + 1,
+          });
+        }
+      });
+      
+      // Note: Pas de toast ici, il sera géré dans le composant
     },
     onError: (error: any) => {
-      toast.error("Erreur lors de la création du produit");
       console.error("Erreur création produit:", error);
+      // Note: Pas de toast ici, il sera géré dans le composant
     },
   });
 };

@@ -12,7 +12,10 @@ import {
   Menu,
   X,
   Store,
-  Bell
+  Bell,
+  Building2,
+  FileText,
+  CreditCard
 } from 'lucide-react';
 import { useLogout } from '@/hooks/auth/useAuthHooks';
 
@@ -51,6 +54,24 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       href: '/stock-exits',
       icon: TrendingDown,
       current: pathname.startsWith('/stock-exits')
+    },
+    {
+      name: 'Comptes',
+      href: '/accounts',
+      icon: Building2,
+      current: pathname.startsWith('/accounts')
+    },
+    {
+      name: 'Transactions',
+      href: '/transactions',
+      icon: CreditCard,
+      current: pathname.startsWith('/transactions')
+    },
+    {
+      name: 'Factures',
+      href: '/invoices',
+      icon: FileText,
+      current: pathname.startsWith('/invoices')
     },
     {
       name: 'Clients',

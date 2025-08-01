@@ -347,7 +347,7 @@ const StockEntryForm: React.FC<StockEntryFormProps> = ({
                     Total général:
                   </span>
                   <span className="text-xl font-bold text-primary-600">
-                    {calculateGrandTotal().toFixed(2)} €
+                    {calculateGrandTotal().toFixed(2)} F
                   </span>
                 </div>
               </div>
